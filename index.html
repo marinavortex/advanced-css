@@ -1,86 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zadatak 3 - Advanced CSS</title>
+    <style>
+        :root {
+            /* Desktop view-set-up (default) */
+            --desktop-rows-count: 2;
+            --desktop-columns-count: 5;
+
+            /*Tablet view-set-up */
+            --tablet-rows-count: 4;
+            --tablet-columns-count: 3;
+
+            /*Mobile view-set-up */
+            --mobile-rows-count: 10;
+            --mobile-columns-count: 1;
+        }
+
+        body {
+            font-family: sans-serif;
+        }
+
+        h1 {
+            font-weight: normal;
+            font-size: 1.3em;
+            height: 25%;
+        }
+
+        #main-flex {
+            margin: 0 auto;
+            max-width: 840px;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+
+        }
+
+        #inside-grid {
+            display: grid;
+            padding-bottom: 30px;
+            padding-top: 20px;
+            height: calc(var(--desktop-rows-count) * 100px + (var(--desktop-rows-count) - 1) * 60px);
+            grid-template-columns: repeat(var(--desktop-columns-count), 120px);
+            column-gap: calc((100% - var(--desktop-columns-count) * 120px) / (var(--desktop-columns-count) - 1));
+            row-gap: calc((100% - var(--desktop-rows-count) * 100px));
+        }
+
+        .box {
+            height: 100px;
+
+        }
+
+        .picture {
+            height: 80%;
+            background-color: rgb(103, 187, 235);
+            background-image: url("placeholder-image.png");
+            background-size: cover;
+            background-position: center;
+            border-radius: 8% 8% 0 0;
+        }
+
+        .label {
+            height: 20%;
+            background-color: rgba(205, 210, 211, 0.493);
+            text-align: center;
+        }
+
+        .p {
+            height: 25%;
+        }
+
+        @media screen and (max-width: 850px) {
+            #inside-grid {
+                height: calc(var(--tablet-rows-count) * 100px + ((var(--tablet-rows-count) - 1) * 60px));
+                grid-template-columns: repeat(var(--tablet-columns-count), 120px);
+                column-gap: calc((100% - var(--tablet-columns-count) * 120px) / (var(--tablet-columns-count) - 1));
+                row-gap: calc((100% - (var(--tablet-rows-count) * 100px)) / (var(--tablet-rows-count) - 1));
+            }
+
+            #main-flex {
+                width: calc(var(--tablet-columns-count) * 120px + (var(--tablet-columns-count) - 1) * 60px);
+            }
+        }
+
+        @media screen and (max-width: 590px) {
+            #inside-grid {
+                height: calc(var(--mobile-rows-count) * 100px + ((var(--mobile-rows-count) - 1) * 60px));
+                grid-template-columns: repeat(var(--mobile-columns-count), 120px);
+                column-gap: calc((100% - var(--mobile-columns-count) * 120px) / (var(--mobile-columns-count) - 1));
+                row-gap: calc((100% - (var(--mobile-rows-count) * 100px)) / (var(--mobile-rows-count) - 1));
+            }
+
+            #main-flex {
+                width: 300px;
+                align-items: center;
+            }
+        }
+
+        @media screen and (max-width: 320px) {
+            #inside-grid {
+                height: calc(var(--mobile-rows-count) * 100px + ((var(--mobile-rows-count) - 1) * 60px));
+                grid-template-columns: repeat(var(--mobile-columns-count), 120px);
+                column-gap: calc((100% - var(--mobile-columns-count) * 120px) / (var(--mobile-columns-count) - 1));
+                row-gap: calc((100% - (var(--mobile-rows-count) * 100px)) / (var(--mobile-rows-count) - 1));
+            }
+
+            #main-flex {
+                width: calc(var(--mobile-columns-count) * 120px + (var(--mobile-columns-count) - 1) * 60px);
+                align-items: center;
+
+            }
+        }
+    </style>
+
 </head>
-<style>
-    body{
-        background-color: #050210;
-        margin: 0 auto;
-        width: 650px;
-        height: 650px;
-    }
 
-    #sareni{
-        border-radius: 360%;
-        margin: 150px;
-        width: 350px;
-        height: 350px;
-        position: relative;
-        z-index: 2;
-        background: linear-gradient(#fb5dad, #55fb9f, #b97aff);
-        box-shadow: 0px -30px 30px rgba(251, 93, 172, 0.199), 30px 0px 30px rgba(85, 251, 160, 0.199), 0px 30px 30px rgba(184, 122, 255, 0.199), -30px 0px 30px rgba(85, 251, 160, 0.199);
-        
-    }
-
-    #crni {
-        background-color: #050210;
-        margin: 25px;
-        position: absolute;
-        width: 300px;
-        height: 300px;
-        border-radius: 360%;
-        z-index: 1;
-    }
-
-    #centar{
-        background-color: #130b2c;
-        position: absolute;
-        width: 300px;
-        height: 300px;
-        border-radius: 360%;
-        z-index: 0;
-    }
-
-    .omot{
-        animation-name: rotiraj;
-        animation-duration: 1s;
-        animation-iteration-count: infinite;
-        animation-timing-function: linear;
-    }
-
-    @keyframes rotiraj{
-        from {
-            transform: rotate(0deg);
-        }
-        to {
-            transform: rotate(360deg);
-        }
-    }
-    
-    .unutra{
-        animation-name: uvecaj;
-        animation-duration: 1s;
-        animation-iteration-count: infinite;
-        animation-timing-function: linear;
-        animation-direction: reverse;
-    }
-
-    @keyframes uvecaj{
-        0% {
-            transform: scale(1,1);
-        }
-        50% {
-            transform: scale(0.5, 0.5);
-        }
-        100% {
-            transform: scale(0,0);
-        }
-    }
-</style>
 <body>
-      <div class="omot" id="sareni"><div id="crni"><div class="unutra" id="centar"></div></div></div>
-       
+
+    <div id="main-flex">
+        <header>
+            <h1>Gallery Heading</h1>
+        </header>
+        <section>
+            <div id="inside-grid">
+                <div class="box">
+                    <div class="picture"></div>
+                    <div class="label">Image title</div>
+                </div>
+                <div class="box">
+                    <div class="picture"></div>
+                    <div class="label">Image title</div>
+                </div>
+                <div class="box">
+                    <div class="picture"></div>
+                    <div class="label">Image title</div>
+                </div>
+                <div class="box">
+                    <div class="picture"></div>
+                    <div class="label">Image title</div>
+                </div>
+                <div class="box">
+                    <div class="picture"></div>
+                    <div class="label">Image title</div>
+                </div>
+                <div class="box">
+                    <div class="picture"></div>
+                    <div class="label">Image title</div>
+                </div>
+                <div class="box">
+                    <div class="picture"></div>
+                    <div class="label">Image title</div>
+                </div>
+                <div class="box">
+                    <div class="picture"></div>
+                    <div class="label">Image title</div>
+                </div>
+                <div class="box">
+                    <div class="picture"></div>
+                    <div class="label">Image title</div>
+                </div>
+                <div class="box">
+                    <div class="picture"></div>
+                    <div class="label">Image title</div>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur neque lacus, imperdiet quis lectus et,
+                hendrerit ultrices nisl. In eleifend nulla imperdiet, tristique ipsum vitae, mattis purus. Morbi maximus
+                fermentum condimentum. In vel lorem fringilla sapien dignissim dictum. Duis at nunc enim. In
+                sollicitudin
+                ultricies lorem quis convallis. Aliquam eget imperdiet quam. Curabitur id sodales velit. Curabitur
+                pharetra
+                ligula in suscipit ornare. Quisque mattis cursus lacus, in dignissim nunc eleifend posuere. Nunc libero
+                metus, dictum ut volutpat nec, egestas id nisl. Sed non maximus dolor, ac cursus magna. Praesent a
+                sodales
+                ex. Sed id pharetra metus, ac lobortis nibh. Nunc feugiat nisi in tempus auctor.</p>
+        </footer>
+    </div>
 </body>
+
 </html>
